@@ -1,4 +1,4 @@
-package com.skorovnavi.movie_library
+package com.skorovnavi.movie_library.ui.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,28 +20,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             MovieLibraryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                 
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MovieLibraryTheme {
-        Greeting("Android")
     }
 }
