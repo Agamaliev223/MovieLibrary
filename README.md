@@ -1,5 +1,5 @@
 ## Демонстрация
 
-![Demo Video](демка2.mp4)
+![Demo Video](demo.mp4)
 
-![Гифка](демка2.gif)
+![Гифка](demo.gif)
