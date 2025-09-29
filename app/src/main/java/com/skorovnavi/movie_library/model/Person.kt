@@ -4,7 +4,7 @@ data class Person(
     val id: Int,
     val name: String,
     val photo: String,
-    val sex: String,
+    val sex: Sex,
     val profession: String?
 )
 
