@@ -1,5 +1,6 @@
 package com.skorovnavi.movie_library.ui.screen.detail
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.skorovnavi.movie_library.di.AppViewModelProvider
 import com.skorovnavi.movie_library.model.MovieDetails
+import com.skorovnavi.movie_library.ui.screen.detail.components.PersonItem
 
 @Composable
 fun MovieDetailScreen(
@@ -86,10 +90,12 @@ private fun MovieDetailContent(movie: MovieDetails) {
                 text = "Рейтинг: Кинопоиск ${movie.rating?.kp ?: "N/A"}, IMDb ${movie.rating?.imdb ?: "N/A"}",
                 style = MaterialTheme.typography.bodyLarge
             )
+            Spacer(modifier = Modifier.padding(vertical = 8.dp))
             Text(
                 text = "Описание: ${movie.description ?: "Нет описания"}",
                 style = MaterialTheme.typography.bodyMedium
             )
+            Spacer(modifier = Modifier.padding(vertical = 8.dp))
             Text(
                 text = "Длительность: ${movie.movieLength ?: "N/A"} мин",
                 style = MaterialTheme.typography.bodyLarge
@@ -98,10 +104,24 @@ private fun MovieDetailContent(movie: MovieDetails) {
                 text = "Страны: ${movie.countries.joinToString { it.name }}",
                 style = MaterialTheme.typography.bodyLarge
             )
-            Text(
-                text = "Актеры и создатели: ${movie.persons.joinToString { "${it.name} (${it.profession})" }}",
-                style = MaterialTheme.typography.bodyLarge
-            )
+
+            if (movie.persons.isNotEmpty()) {
+                Spacer(modifier = Modifier.padding(vertical = 8.dp))
+                Text(
+                    text = "Актеры и создатели",
+                    style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
+
+                LazyRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    items(movie.persons) { person ->
+                        PersonItem(person = person)
+                    }
+                }
+            }
         }
     }
 }
