@@ -5,6 +5,8 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.skorovnavi.movie_library.MovieLibraryApplication
+import com.skorovnavi.movie_library.domain.usecase.GetMovieDetailsUseCase
+import com.skorovnavi.movie_library.domain.usecase.GetMoviesUseCase
 import com.skorovnavi.movie_library.ui.screen.detail.MovieDetailViewModel
 import com.skorovnavi.movie_library.ui.screen.list.MovieListViewModel
 
@@ -13,16 +15,19 @@ object AppViewModelProvider {
 
         initializer {
             MovieListViewModel(
-                mockData = movieApplication().container.mockData
+                getMoviesUseCase = GetMoviesUseCase(
+                    repo = movieApplication().container.moviesRepository
+                )
             )
         }
 
         initializer {
             MovieDetailViewModel(
-                mockData = movieApplication().container.mockData
+                getMovieDetailsUseCase = GetMovieDetailsUseCase(
+                    repo = movieApplication().container.moviesRepository
+                )
             )
         }
-
     }
 }
 
