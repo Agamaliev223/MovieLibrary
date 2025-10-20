@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.skorovnavi.movie_library.data.AppViewModelProvider
+import com.skorovnavi.movie_library.di.AppViewModelProvider
 import com.skorovnavi.movie_library.ui.screen.list.components.MovieCard
 
 

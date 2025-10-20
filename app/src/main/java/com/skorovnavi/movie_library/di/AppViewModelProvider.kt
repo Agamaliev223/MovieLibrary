@@ -1,4 +1,4 @@
-package com.skorovnavi.movie_library.data
+package com.skorovnavi.movie_library.di
 
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras

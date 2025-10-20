@@ -2,7 +2,7 @@ package com.skorovnavi.movie_library.ui.screen.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.skorovnavi.movie_library.data.MockData
+import com.skorovnavi.movie_library.data.repository.MockData
 import com.skorovnavi.movie_library.model.Movie
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

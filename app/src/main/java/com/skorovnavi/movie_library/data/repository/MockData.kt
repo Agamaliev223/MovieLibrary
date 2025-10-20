@@ -1,4 +1,4 @@
-package com.skorovnavi.movie_library.data
+package com.skorovnavi.movie_library.data.repository
 
 import com.skorovnavi.movie_library.model.Country
 import com.skorovnavi.movie_library.model.Movie
