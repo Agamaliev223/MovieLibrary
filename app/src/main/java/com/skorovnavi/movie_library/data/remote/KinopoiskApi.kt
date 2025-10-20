@@ -18,7 +18,7 @@ interface KinopoiskApi {
 
     @GET("v1.4/movie/search")
     suspend fun searchByName(
-        @Query("name") name: String,
+        @Query("query") query: String,
         @Query("page") page: Int = 1,
         @Query("limit") limit: Int = 20
     ): MovieListResponseDto

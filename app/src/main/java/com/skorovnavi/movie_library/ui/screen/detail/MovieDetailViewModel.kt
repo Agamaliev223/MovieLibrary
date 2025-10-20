@@ -21,11 +21,7 @@ class MovieDetailViewModel(
         viewModelScope.launch {
             try {
                 val movie = getMovieDetailsUseCase(movieId)
-                if (movie != null) {
-                    _uiState.value = MovieDetailUiState.Success(movie)
-                } else {
-                    _uiState.value = MovieDetailUiState.Error("Movie not found")
-                }
+                _uiState.value = MovieDetailUiState.Success(movie)
             } catch (e: Exception) {
                 _uiState.value = MovieDetailUiState.Error(e.message ?: "Unknown error")
             }
