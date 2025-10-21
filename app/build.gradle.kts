@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.skorovnavi.movie_library"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.skorovnavi.movie_library"
@@ -56,4 +56,10 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // загрузка изображений из сети
+    implementation(libs.coil.compose)
+
+    // навигация compose
+    implementation(libs.androidx.navigation.compose)
 }
