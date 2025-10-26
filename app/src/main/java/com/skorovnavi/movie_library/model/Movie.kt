@@ -8,7 +8,8 @@ data class Movie(
     val rating: Rating?,
     val poster: Poster?,
     val genres: List<Genre>,
-    val movieLength: Int?
+    val movieLength: Int?,
+    val inFavorites: Boolean = false,
 )
 
 data class MovieDetails(
@@ -22,5 +23,6 @@ data class MovieDetails(
     val countries: List<Country>,
     val persons: List<Person>,
     val movieLength: Int?,
-    val ageRating: Int?
+    val ageRating: Int?,
+    val inFavorites: Boolean = false,
 )

@@ -17,6 +17,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun MovieBottomNavigationBar(navController: NavHostController) {
     val screens = listOf(
         BottomNavItem.Movies,
+        BottomNavItem.Favorites,
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()

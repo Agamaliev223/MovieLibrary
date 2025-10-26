@@ -1,28 +1,17 @@
 package com.skorovnavi.movie_library.navigation
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.skorovnavi.movie_library.R
 import com.skorovnavi.movie_library.ui.screen.detail.MovieDetailScreen
+import com.skorovnavi.movie_library.ui.screen.favorites.FavoritesListScreen
+import com.skorovnavi.movie_library.ui.screen.filters.FiltersScreen
 import com.skorovnavi.movie_library.ui.screen.list.MovieListScreen
 
 @Composable
@@ -44,7 +33,18 @@ fun MovieAppNavigation(modifier: Modifier = Modifier) {
                     onMovieClick = { movieId ->
                         navController.navigate(Routes.createMovieDetailRoute(movieId))
                     },
-                    modifier = modifier
+                    onFiltersClick = { navController.navigate(Routes.MOVIE_FILTERS) },
+                    modifier = modifier,
+                )
+            }
+
+            composable(BottomNavItem.Favorites.route) {
+                FavoritesListScreen(
+                    onMovieClick = { movieId ->
+                        navController.navigate(Routes.createMovieDetailRoute(movieId))
+                    },
+                    onFiltersClick = { navController.navigate(Routes.MOVIE_FILTERS) },
+                    modifier = modifier,
                 )
             }
 
@@ -60,7 +60,14 @@ fun MovieAppNavigation(modifier: Modifier = Modifier) {
                 val movieId = backStackEntry.arguments?.getLong("movieId") ?: 0L
                 MovieDetailScreen(
                     movieId = movieId,
-                    modifier = modifier
+                    modifier = modifier,
+                )
+            }
+
+            composable(Routes.MOVIE_FILTERS) {
+                FiltersScreen(
+                    onDone = { navController.popBackStack() },
+                    modifier = modifier,
                 )
             }
         }
