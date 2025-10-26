@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MovieListResponseDto(
     val docs: List<MovieDto> = emptyList(),
-    val total: Int? = null
+    val total: Int? = null,
 )
 
 @Serializable
@@ -18,7 +18,7 @@ data class MovieDto(
     val poster: PosterDto? = null,
     val genres: List<GenreDto> = emptyList(),
     @SerialName("movieLength")
-    val movieLength: Int? = null
+    val movieLength: Int? = null,
 )
 
 @Serializable
@@ -35,7 +35,7 @@ data class MovieDetailsDto(
     @SerialName("movieLength")
     val movieLength: Int? = null,
     @SerialName("ageRating")
-    val ageRating: Int? = null
+    val ageRating: Int? = null,
 )
 
 @Serializable
@@ -58,6 +58,6 @@ data class PosterDto(val url: String? = null, val previewUrl: String? = null)
 
 @Serializable
 data class RatingDto(
-    val kp: Double? = null,
-    val imdb: Double? = null
+    @SerialName("kp") val kp: Double? = null,
+    @SerialName("imdb") val imdb: Double? = null
 )

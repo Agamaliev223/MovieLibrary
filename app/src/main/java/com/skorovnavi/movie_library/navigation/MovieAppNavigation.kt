@@ -10,6 +10,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.skorovnavi.movie_library.ui.screen.detail.MovieDetailScreen
+import com.skorovnavi.movie_library.ui.screen.favorites.FavoritesListScreen
+import com.skorovnavi.movie_library.ui.screen.filters.FiltersScreen
 import com.skorovnavi.movie_library.ui.screen.list.MovieListScreen
 
 @Composable
@@ -31,7 +33,18 @@ fun MovieAppNavigation(modifier: Modifier = Modifier) {
                     onMovieClick = { movieId ->
                         navController.navigate(Routes.createMovieDetailRoute(movieId))
                     },
-                    modifier = modifier
+                    onFiltersClick = { navController.navigate(Routes.MOVIE_FILTERS) },
+                    modifier = modifier,
+                )
+            }
+
+            composable(BottomNavItem.Favorites.route) {
+                FavoritesListScreen(
+                    onMovieClick = { movieId ->
+                        navController.navigate(Routes.createMovieDetailRoute(movieId))
+                    },
+                    onFiltersClick = { navController.navigate(Routes.MOVIE_FILTERS) },
+                    modifier = modifier,
                 )
             }
 
@@ -47,7 +60,14 @@ fun MovieAppNavigation(modifier: Modifier = Modifier) {
                 val movieId = backStackEntry.arguments?.getLong("movieId") ?: 0L
                 MovieDetailScreen(
                     movieId = movieId,
-                    modifier = modifier
+                    modifier = modifier,
+                )
+            }
+
+            composable(Routes.MOVIE_FILTERS) {
+                FiltersScreen(
+                    onDone = { navController.popBackStack() },
+                    modifier = modifier,
                 )
             }
         }

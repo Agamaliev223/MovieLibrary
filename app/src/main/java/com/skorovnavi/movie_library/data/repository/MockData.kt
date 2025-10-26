@@ -21,7 +21,8 @@ class MockData {
                 previewUrl = "https://avatars.mds.yandex.net/get-ott/13074011/2a0000019504097dd3ec1bf7f8db56b4026e/375x375"
             ),
             genres = listOf(Genre("драма"), Genre("комедия"), Genre("биография")),
-            movieLength = 112
+            movieLength = 112,
+            inFavorites = false,
         ),
         Movie(
             id = 1143242,
@@ -33,7 +34,8 @@ class MockData {
                 previewUrl = "https://avatars.mds.yandex.net/get-ott/1648503/2a000001711b57abb795e9276957168f83e9/orig"
             ),
             genres = listOf(Genre("криминал"), Genre("комедия"), Genre("боевик")),
-            movieLength = 113
+            movieLength = 113,
+            inFavorites = false,
         ),
         Movie(
             id = 462682,
@@ -45,7 +47,8 @@ class MockData {
                 previewUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOLIyHjOuuloBpwARPNDoH7CYOwX26G-0ctg&s"
             ),
             genres = listOf(Genre("криминал"), Genre("комедия"), Genre("биография")),
-            movieLength = 180
+            movieLength = 180,
+            inFavorites = false,
         ),
         Movie(
             id = 447301,
@@ -57,7 +60,8 @@ class MockData {
                 previewUrl = "https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/8ab9a119-dd74-44f0-baec-0629797483d7/600x900"
             ),
             genres = listOf(Genre("фантастика"), Genre("боевик"), Genre("триллер")),
-            movieLength = 148
+            movieLength = 148,
+            inFavorites = false,
         )
     )
 
@@ -106,7 +110,8 @@ class MockData {
                     )
                 ),
                 movieLength = 112,
-                ageRating = 16
+                ageRating = 16,
+                inFavorites = false,
             )
 
             else -> MovieDetails(
@@ -123,7 +128,8 @@ class MockData {
                 countries = listOf(Country("Россия")),
                 persons = listOf(),
                 movieLength = 120,
-                ageRating = 16
+                ageRating = 16,
+                inFavorites = false,
             )
         }
     }

@@ -1,4 +1,4 @@
-package com.skorovnavi.movie_library.ui.screen.list
+package com.skorovnavi.movie_library.ui.screen.favorites
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -10,11 +10,11 @@ import com.skorovnavi.movie_library.di.AppViewModelProvider
 import com.skorovnavi.movie_library.ui.common.MovieListContent
 
 @Composable
-fun MovieListScreen(
+fun FavoritesListScreen(
     onMovieClick: (Long) -> Unit,
     onFiltersClick: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: MovieListViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    viewModel: FavoritesViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val state by viewModel.uiState.collectAsState()
 
@@ -26,12 +26,12 @@ fun MovieListScreen(
 
     MovieListContent(
         state = state,
-        onSearchChange = { query -> viewModel.searchMovies(query) },
+        onSearchChange = { query -> viewModel.searchInFavorites(query) },
         onFiltersClick = onFiltersClick,
-        onRetryPageLoad = { viewModel.searchMovies(state.searchQuery ?: "") },
-        onLoadNextPage = { viewModel.loadNextPage() },
+        onRetryPageLoad = { },
+        onLoadNextPage = { },
         onMovieClick = { id -> onMovieClick(id) },
-        onToggleFavorite = { id -> viewModel.changeFavorites(id) },
+        onToggleFavorite = { id -> viewModel.onToggleFavorite(id) },
         modifier = modifier,
     )
 }

@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 
     alias(libs.plugins.jetbrains.kotlin.serialization)
+
+    id("com.google.devtools.ksp")
 }
 
 val localProperties = Properties().apply {
@@ -80,6 +82,14 @@ dependencies {
 
     // иконки
     implementation(libs.androidx.material.icons.extended)
+
+    // локальное хранение данных Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    // локальное хранение данных DataStore
+    implementation(libs.androidx.datastore.preferences)
 
     // сетевые запросы
     implementation(libs.retrofit)

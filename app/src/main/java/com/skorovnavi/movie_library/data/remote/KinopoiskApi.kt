@@ -10,7 +10,7 @@ interface KinopoiskApi {
     suspend fun searchMovies(
         @Query("page") page: Int = 1,
         @Query("limit") limit: Int = 20,
-        @QueryMap(encoded = true) filters: Map<String, String> = emptyMap()
+        @QueryMap(encoded = true) filters: Map<String, String> = emptyMap(),
     ): MovieListResponseDto
 
     @GET("v1.4/movie/{id}")
@@ -20,6 +20,7 @@ interface KinopoiskApi {
     suspend fun searchByName(
         @Query("query") query: String,
         @Query("page") page: Int = 1,
-        @Query("limit") limit: Int = 20
+        @Query("limit") limit: Int = 20,
+        @QueryMap(encoded = true) filters: Map<String, String> = emptyMap(),
     ): MovieListResponseDto
 }

@@ -6,9 +6,14 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.skorovnavi.movie_library.MovieLibraryApplication
 import com.skorovnavi.movie_library.domain.usecase.GetMovieDetailsUseCase
+import com.skorovnavi.movie_library.domain.usecase.GetMovieDetailsWithFallbackUseCase
 import com.skorovnavi.movie_library.domain.usecase.GetMoviesUseCase
-import com.skorovnavi.movie_library.domain.usecase.SearchMoviesUseCase
+import com.skorovnavi.movie_library.domain.usecase.ObserveFavoriteIdsUseCase
+import com.skorovnavi.movie_library.domain.usecase.ObserveFavoritesUseCase
+import com.skorovnavi.movie_library.domain.usecase.ToggleFavoriteUseCase
 import com.skorovnavi.movie_library.ui.screen.detail.MovieDetailViewModel
+import com.skorovnavi.movie_library.ui.screen.favorites.FavoritesViewModel
+import com.skorovnavi.movie_library.ui.screen.filters.FiltersViewModel
 import com.skorovnavi.movie_library.ui.screen.list.MovieListViewModel
 
 object AppViewModelProvider {
@@ -17,20 +22,49 @@ object AppViewModelProvider {
         initializer {
             MovieListViewModel(
                 getMoviesUseCase = GetMoviesUseCase(
-                    repo = movieApplication().container.moviesRepository
+                    moviesRepo = movieApplication().container.moviesRepository,
+                    favoritesRepo = movieApplication().container.favoritesRepository,
                 ),
-                searchMoviesUseCase = SearchMoviesUseCase(
-                    repo = movieApplication().container.moviesRepository
-                )
+                observeFavoriteIdsUseCase = ObserveFavoriteIdsUseCase(
+                    favoritesRepo = movieApplication().container.favoritesRepository,
+                ),
+                getMovieDetailsUseCase = GetMovieDetailsUseCase(
+                    moviesRepo = movieApplication().container.moviesRepository,
+                    favoritesRepo = movieApplication().container.favoritesRepository,
+                ),
+                toggleFavoriteUseCase = ToggleFavoriteUseCase(
+                    favoritesRepo = movieApplication().container.favoritesRepository,
+                ),
+                filterRepo = movieApplication().container.filterRepository,
+            )
+        }
+
+        initializer {
+            FavoritesViewModel(
+                observeFavoritesUseCase = ObserveFavoritesUseCase(
+                    favoritesRepo = movieApplication().container.favoritesRepository,
+                ),
+                toggleFavoriteUseCase = ToggleFavoriteUseCase(
+                    favoritesRepo = movieApplication().container.favoritesRepository,
+                ),
+                filterRepo = movieApplication().container.filterRepository,
             )
         }
 
         initializer {
             MovieDetailViewModel(
-                getMovieDetailsUseCase = GetMovieDetailsUseCase(
-                    repo = movieApplication().container.moviesRepository
-                )
+                getMovieDetailsWithFallbackUseCase = GetMovieDetailsWithFallbackUseCase(
+                    getMovieDetailsUseCase = GetMovieDetailsUseCase(
+                        moviesRepo = movieApplication().container.moviesRepository,
+                        favoritesRepo = movieApplication().container.favoritesRepository,
+                    ),
+                    favoritesRepo = movieApplication().container.favoritesRepository,
+                ),
             )
+        }
+
+        initializer {
+            FiltersViewModel(filterRepo = movieApplication().container.filterRepository)
         }
     }
 }

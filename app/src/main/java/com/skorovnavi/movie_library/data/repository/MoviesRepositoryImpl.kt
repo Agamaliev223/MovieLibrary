@@ -20,7 +20,11 @@ class MoviesRepositoryImpl(
     private val cached = _cached.asStateFlow()
     private val moviesCache = mutableMapOf<String, List<Movie>>()
 
-    override suspend fun searchMovies(page: Int, limit: Int, filters: Map<String, String>): List<Movie> =
+    override suspend fun searchMovies(
+        page: Int,
+        limit: Int,
+        filters: Map<String, String>
+    ): List<Movie> =
         withContext(dispatcher) {
             val cacheKey = "search_${filters.hashCode()}_${page}_$limit"
 
@@ -42,27 +46,36 @@ class MoviesRepositoryImpl(
             movies
         }
 
-    override suspend fun searchMoviesByName(query: String, page: Int, limit: Int): List<Movie> =
-        withContext(dispatcher) {
-            val cacheKey = "search_${query}_${page}_$limit"
+    override suspend fun searchMoviesByName(
+        query: String,
+        page: Int,
+        limit: Int,
+        filters: Map<String, String>
+    ): List<Movie> = withContext(dispatcher) {
+        val cacheKey = "search_${query}_${page}_${limit}_${filters.hashCode()}"
 
-            moviesCache[cacheKey]?.let { cachedMovies ->
-                _cached.value = if (page <= 1) cachedMovies else _cached.value + cachedMovies
-                return@withContext cachedMovies
-            }
-
-            val resp = api.searchByName(query = query, page = page, limit = limit)
-            val movies = resp.docs.map { it.toDomain() }
-
-            moviesCache[cacheKey] = movies
-
-            if (page <= 1) {
-                _cached.value = movies
-            } else {
-                _cached.value += movies
-            }
-            movies
+        moviesCache[cacheKey]?.let { cachedMovies ->
+            _cached.value = if (page <= 1) cachedMovies else _cached.value + cachedMovies
+            return@withContext cachedMovies
         }
+
+        val resp = api.searchByName(
+            query = query,
+            page = page,
+            limit = limit,
+            filters = filters
+        )
+        val movies = resp.docs.map { it.toDomain() }
+
+        moviesCache[cacheKey] = movies
+
+        if (page <= 1) {
+            _cached.value = movies
+        } else {
+            _cached.value += movies
+        }
+        movies
+    }
 
     override suspend fun getMovieDetails(id: Long): MovieDetails = withContext(dispatcher) {
         val dto = api.getMovieDetails(id)

@@ -14,7 +14,8 @@ interface MoviesRepository {
     suspend fun searchMoviesByName(
         query: String,
         page: Int = 1,
-        limit: Int = 20
+        limit: Int = 20,
+        filters: Map<String, String> = emptyMap()
     ): List<Movie>
 
     suspend fun getMovieDetails(id: Long): MovieDetails
